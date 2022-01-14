@@ -26,6 +26,6 @@ public class MessageBusPublisher : IMessageBusPublisher
         var message = _mapper.Map<Message>(platform);
         message.Event = "Platform_Published";
         await _bus.PubSub.PublishAsync<Message>(message);
-        Console.WriteLine($"Message published - {message}");
+        Console.WriteLine($"Message published!");
     }
 }
