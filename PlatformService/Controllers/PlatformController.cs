@@ -54,12 +54,7 @@ public class PlatformController : ControllerBase
 
         try
         {
-            // await _commandDataClient.SendPlatformToCommand(platformReadDto);
             await _publisher.PublishPlatform(platform);
-            // var message= _mapper.Map<Message>(platformReadDto);
-            // message.Event ="Platform_Published";
-            // await _bus.PubSub.PublishAsync<Message>(message);
-            // Console.WriteLine("Message published!");
         }
         catch (Exception ex)
         {
