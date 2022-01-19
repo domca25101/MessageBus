@@ -2,7 +2,7 @@ using AutoMapper;
 using CommandService.Data;
 using CommandService.Dtos;
 using CommandService.Models;
-using Messages;
+using MessageModels;
 
 namespace CommandService.EventProcessing;
 
@@ -21,7 +21,7 @@ public class EventProcessor : IEventProcessor
     /// Processes message based on Event written inside message
     /// </summary>
     /// <param name="message"></param>
-    public void ProccesEvent(Message message)
+    public void ProccesEvent(PlatformMessage message)
     {
         var eventType = DetermineEvent(message);
 
@@ -40,7 +40,7 @@ public class EventProcessor : IEventProcessor
     /// </summary>
     /// <param name="platformPublishedDto"></param>
     /// <returns></returns>
-    private EventType DetermineEvent(Message message)
+    private EventType DetermineEvent(PlatformMessage message)
     {
         Console.WriteLine("--> Determining Event");
         var eventType = _mapper.Map<GenericEventDto>(message);
@@ -60,7 +60,7 @@ public class EventProcessor : IEventProcessor
     /// Adds platform to DB
     /// </summary>
     /// <param name="message"></param>
-    private void AddPlatform(Message message)
+    private void AddPlatform(PlatformMessage message)
     {
         using (var scope = _scopeFactory.CreateScope())
         {

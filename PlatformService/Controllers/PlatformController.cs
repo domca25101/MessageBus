@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using PlatformService.Dtos;
 using PlatformService.Data;
 using PlatformService.Models;
-using EasyNetQ;
-using Messages;
 using PlatformService.AsyncDataServices;
 
 namespace PlatformService.Controllers;

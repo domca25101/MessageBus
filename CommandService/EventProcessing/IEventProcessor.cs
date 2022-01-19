@@ -1,8 +1,8 @@
-using Messages;
+using MessageModels;
 
 namespace CommandService.EventProcessing;
 
 public interface IEventProcessor
 {
-    void ProccesEvent(Message message);
+    void ProccesEvent(PlatformMessage message);
 }

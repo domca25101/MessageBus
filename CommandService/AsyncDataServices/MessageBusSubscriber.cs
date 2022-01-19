@@ -1,6 +1,6 @@
 using CommandService.EventProcessing;
 using EasyNetQ;
-using Messages;
+using MessageModels;
 
 namespace CommandService.AsyncDataServices;
 
@@ -23,9 +23,11 @@ public class MessageBusSubscriber : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         stoppingToken.ThrowIfCancellationRequested();
-        await _bus.PubSub.SubscribeAsync<Message>("platform", _eventProcessor.ProccesEvent);
+        // await _bus.PubSub.SubscribeAsync<PlatformMessage>("platform", _eventProcessor.ProccesEvent);
+        // await _bus.SendReceive.ReceiveAsync<PlatformMessage>("Platform.Data", message =>  _eventProcessor.ProccesEvent(message));
+        await _bus.SendReceive.ReceiveAsync("Platform.Data", x => x.Add<PlatformMessage>(message => _eventProcessor.ProccesEvent(message)));
         Console.WriteLine("--> Listening for Messages");
-
+ 
     }
 
 }

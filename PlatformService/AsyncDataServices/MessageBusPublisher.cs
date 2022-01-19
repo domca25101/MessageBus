@@ -1,6 +1,6 @@
 using AutoMapper;
 using EasyNetQ;
-using Messages;
+using MessageModels;
 using PlatformService.Models;
 
 namespace PlatformService.AsyncDataServices;
@@ -23,9 +23,10 @@ public class MessageBusPublisher : IMessageBusPublisher
     /// <returns></returns>
     public async Task PublishPlatform(Platform platform)
     {
-        var message = _mapper.Map<Message>(platform);
+        var message = _mapper.Map<PlatformMessage>(platform);
         message.Event = "Platform_Published";
-        await _bus.PubSub.PublishAsync<Message>(message);
+        // await _bus.PubSub.PublishAsync<PlatformMessage>(message);
+        await _bus.SendReceive.SendAsync("Platform.Data", message);
         Console.WriteLine($"Message published!");
     }
 }

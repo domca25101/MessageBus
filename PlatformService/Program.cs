@@ -1,5 +1,6 @@
 using EasyNetQ;
 using Microsoft.EntityFrameworkCore;
+using PlatformService;
 using PlatformService.AsyncDataServices;
 using PlatformService.Data;
 
@@ -18,7 +19,7 @@ builder.Services.AddSwaggerGen();
 Console.WriteLine($"--> CommandService Endpoint {builder.Configuration["Commandservice"]}");
 
 //connect to RabbitMQ Broker
-var bus = RabbitHutch.CreateBus(builder.Configuration.GetConnectionString("RabbitMQ"));
+var bus = RabbitHutch.CreateBus(builder.Configuration.GetConnectionString("RabbitMQ"), registerServices: s => s.Register<ITypeNameSerializer, TypeNameSerializer>());
 builder.Services.AddSingleton(bus);
 
 builder.Services.AddSingleton<IMessageBusPublisher, MessageBusPublisher>();

@@ -1,5 +1,5 @@
 using AutoMapper;
-using Messages;
+using MessageModels;
 using PlatformService.Dtos;
 using PlatformService.Models;
 
@@ -12,7 +12,7 @@ public class PlatformsProfile : Profile
         //Source -> Target
         CreateMap<Platform, PlatformReadDto>();
         CreateMap<PlatformCreateDto, Platform>();
-        CreateMap<PlatformReadDto, Message>();
-        CreateMap<Platform, Message>();
+        // CreateMap<PlatformReadDto, Message>();
+        CreateMap<Platform, PlatformMessage>();
     }
 }

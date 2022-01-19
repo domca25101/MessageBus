@@ -1,5 +1,6 @@
-﻿namespace Messages;
-public class Message
+namespace MessageModels;
+
+public class PlatformMessage
 {
     public int Id { get; set; }
     public string Name { get; set; }
