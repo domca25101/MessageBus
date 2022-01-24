@@ -19,7 +19,9 @@ builder.Services.AddSwaggerGen();
 Console.WriteLine($"--> CommandService Endpoint {builder.Configuration["Commandservice"]}");
 
 //connect to RabbitMQ Broker
-var bus = RabbitHutch.CreateBus(builder.Configuration.GetConnectionString("RabbitMQ"), registerServices: s => s.Register<ITypeNameSerializer, TypeNameSerializer>());
+var bus = RabbitHutch.CreateBus(
+    builder.Configuration.GetConnectionString("RabbitMQ"),
+    registerServices: s => s.Register<ITypeNameSerializer, TypeNameSerializer>());
 builder.Services.AddSingleton(bus);
 
 builder.Services.AddSingleton<IMessageBusPublisher, MessageBusPublisher>();
